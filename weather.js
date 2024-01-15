@@ -57,7 +57,7 @@ const initCLI = () => {
   const args = getArgs(process.argv);
 
   if (args.h) {
-    printHelp();
+    return printHelp();
   }
 
   if (args.c) {
