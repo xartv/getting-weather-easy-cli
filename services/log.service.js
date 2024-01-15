@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import dedent from "dedent-js";
+import { getIcon } from "./api.service.js";
 
 export const printError = (error) => {
   console.log(`${chalk.bgRed(" ERROR ")} ${error}`);
@@ -17,5 +18,19 @@ export const printHelp = () => {
     -h для вывода помощи
     -t [API_KEY] для сохранения токена
     `)
+  );
+};
+
+export const printWeather = (weather) => {
+  const icon = getIcon(weather?.weather?.[0]?.icon);
+
+  console.log(
+    dedent(`${chalk.bgWhiteBright.black(" WEATHER ")} in ${weather.name}
+  ${icon}  ${weather?.weather?.[0]?.description}
+  TEMP: ${weather?.main?.temp} C
+  FEELS_LIKE: ${weather?.main?.feels_like} C
+  HUMIDITY: ${weather.main.humidity}%
+  WIND: ${weather.wind.speed} m/s
+  `)
   );
 };
